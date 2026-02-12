@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רשימת מטלות דיגיטלית</title>
+    <link rel="icon" href="ראש דרדסבא.png" type="image/png">
+    <style>
+        body {
+            background-color: #ffd0c2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #ff6152;
+        }
+
+        h1 {
+            color: #ff6152;
+            /* גוון כהה יותר של אפרסק */
+        }
+
+        #container {
+            width: 80%;
+            /* רוחב 80% מהדף */
+            margin: 0 auto;
+            /* מרכז את התוכן */
+        }
+
+        #form {
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 2px solid #ff6152;
+            /* גוון אפרסק */
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #ff6152;
+            /* גוון אפרסק */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ffe0b2;
+            /* גוון בהיר של אפרסק */
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            /* גודל הריבוע של סימון */
+            height: 20px;
+            /* גובה הריבוע של סימון */
+        }
+
+        .remove-btn {
+            background: none;
+            /* אין רקע */
+            border: none;
+            /* אין גבול */
+            color: #d84315;
+            /* צבע כהה ל-x */
+            cursor: pointer;
+            /* מצביע כאשר מרחפים מעל הכפתור */
+            font-size: 16px;
+            /* גודל גופן */
+        }
+
+        #clear-btn {
+            margin-top: 20px;
+        }
+
+        #bottom-right-image {
+            position: fixed;
+            /* מיקום קבוע */
+            bottom: 20px;
+            /* מרחק מהחלק התחתון */
+            right: 20px;
+            /* מרחק מהצד הימני */
+            width: 200px;
+            /* רוחב התמונה */
+            height: auto;
+            /* גובה אוטומטי לשמירה על פרופורציות */
+            z-index: 1000;
+            /* לוודא שהתמונה מעל לתוכן אחר */
+        }
+
+        #bottom-left-image {
+            position: fixed;
+            /* מיקום קבוע */
+            top: 20px;
+            /* מרחק מהחלק העליון */
+            left: 20px;
+            /* מרחק מהצד השמאלי */
+            width: 200px;
+            /* רוחב התמונה */
+            height: auto;
+            /* גובה אוטומטי לשמירה על פרופורציות */
+            z-index: 1000;
+            /* לוודא שהתמונה מעל לתוכן אחר */
+        }
+    </style>
+</head>
+
+<body dir="rtl">
+    <h1>רשימת המטלות שלי</h1>
+    <p>רשימת מטלות דיגיטלית לדרדסית המתוקה שלי שאוהבת שהכל מסודר ומאורגן לה! 😘❤️</p>
+    <div id="container">
+        <div id="form">
+            <input type="text" name="p-name" id="p-name" placeholder="הוספת משימה">
+            <button>הוספת משימה</button>
+        </div>
+
+        <ul>
+        </ul>
+
+        <button id="clear-btn">מחק את כל המשימות</button>
+        <img src="דרדסבא.png" id="bottom-right-image" alt="תמונה קטנה">
+        <img src="דרדסית.png" id="bottom-left-image" alt="תמונה קטנה">
+
+    </div>
+
+    <script>
+        const el = {
+            input: document.querySelector('#p-name'),
+            list: document.querySelector('ul'),
+            addBtn: document.querySelector('#form > button'),
+            clearBtn: document.querySelector('#clear-btn')
+        };
+
+        declareEvents();
+
+        function removeProduct(id) {
+            document.getElementById(id).remove();
+        }
+
+        function addProduct() {
+            const p = el.input.value;
+
+            const id = `pr${Date.now()}`;
+
+            el.list.innerHTML += `
+    <li id="${id}">
+        <input type="checkbox">
+        ${p}
+        <button class="remove-btn" onclick="removeProduct('${id}')">❌</button>
+    </li>
+    `;
+
+            el.input.value = '';
+        }
+
+        function clearAllProducts() {
+            el.list.innerHTML = '';
+        }
+
+        function declareEvents() {
+            el.addBtn.onclick = addProduct;
+            el.clearBtn.onclick = clearAllProducts;
+        }
+
+    </script>
+</body>
+
+</html>
